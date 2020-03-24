@@ -6,6 +6,7 @@ public class VideoController : MonoBehaviour
 {
     public MediaPlayer mediaPlayer;
     public GameObject videoSphere;
+    public GameObject world;
 
     private void OnEnable()
     {
@@ -43,6 +44,8 @@ public class VideoController : MonoBehaviour
     {
         videoSphere.SetActive(true);
         mediaPlayer.Play();
+
+        world.SetActive(false);
     }
 
     public void Pause()
@@ -52,6 +55,7 @@ public class VideoController : MonoBehaviour
 
     public void Reset()
     {
+        world.SetActive(true);
         videoSphere.SetActive(false);
         mediaPlayer.Stop();
         mediaPlayer.Control.Rewind();
