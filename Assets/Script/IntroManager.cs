@@ -34,8 +34,7 @@ public class IntroManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         logoLayer = logo.gameObject.layer;
-        logo.gameObject.layer = 0;
-        logo.gameObject.SetActive(false);
+
         SetUpIntro();
     }
     void OnMounted()
@@ -57,11 +56,15 @@ public class IntroManager : MonoBehaviour
 
     void SetUpIntro()
     {
+        logo.gameObject.layer = 0;
+        logo.gameObject.SetActive(false);
+
         currentText = 0;        
-        //textbox = GetComponentInChildren<TextMeshPro>();
-        textbox.text = introTexts[currentText];
-        animator.Play("fadeIn");
+        textbox.text = introTexts[currentText];        
         textbox.gameObject.SetActive(true);
+
+        animator.Rebind();
+        animator.Play("fadeIn");
     }
    
 
