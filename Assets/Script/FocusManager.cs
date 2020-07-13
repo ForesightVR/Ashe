@@ -11,7 +11,7 @@ public class FocusManager : MonoBehaviour
 
     public float pauseDelay;
 
-    VideoState currentState = VideoState.Entry;
+    public VideoState currentState = VideoState.Entry;
     Coroutine resetVideo;
 
     private void Awake()

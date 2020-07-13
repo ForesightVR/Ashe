@@ -18,7 +18,17 @@ public class IntroManager : MonoBehaviour
     public float betweenTime;
     Animator animator;
     public TextMeshProUGUI textbox;
-    
+
+    private void OnEnable()
+    {
+        OVRManager.HMDMounted += OnMounted;
+        FocusManager.Instance.OnStateChanged += OnReturn;
+    }
+    private void OnDisable()
+    {
+        OVRManager.HMDMounted -= OnMounted;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +36,34 @@ public class IntroManager : MonoBehaviour
         logoLayer = logo.gameObject.layer;
         logo.gameObject.layer = 0;
         logo.gameObject.SetActive(false);
+        SetUpIntro();
+    }
+    void OnMounted()
+    {
+        if (FocusManager.Instance.currentState == VideoState.Entry)
+        {
+            SetUpIntro();
+        }
+    }
+
+    void OnReturn(VideoState state)
+    {
+        if (state == VideoState.Entry)
+        {
+            logo.gameObject.layer = 0;
+            logo.gameObject.SetActive(false);
+        }
+    }
+
+    void SetUpIntro()
+    {
+        currentText = 0;        
         //textbox = GetComponentInChildren<TextMeshPro>();
         textbox.text = introTexts[currentText];
+        animator.Play("fadeIn");
+        textbox.gameObject.SetActive(true);
     }
+   
 
     public IEnumerator OnIntroFadeInFinished()
     {
@@ -40,6 +75,8 @@ public class IntroManager : MonoBehaviour
     {
         yield return new WaitForSeconds(betweenTime);
         UpdateDisplay();
+
+        Debug.LogError($"Intro Fade-out has inished: {currentText}");
     }
 
     public void OnLogoFadeInFinished() 
@@ -62,6 +99,7 @@ public class IntroManager : MonoBehaviour
             logo.color = new Color(logo.color.r, logo.color.g, logo.color.b, 0);
             logo.gameObject.SetActive(true);
             animator.Play("logoIn");
+                   
         }
     }
 }
