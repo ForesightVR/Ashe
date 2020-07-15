@@ -102,7 +102,6 @@ public class IntroManager : MonoBehaviour
             logo.color = new Color(logo.color.r, logo.color.g, logo.color.b, 0);
             logo.gameObject.SetActive(true);
             animator.Play("logoIn");
-                   
         }
     }
 }
