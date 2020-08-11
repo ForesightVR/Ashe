@@ -518,6 +518,7 @@ MonoBehaviour:
   mediaPlayer: {fileID: 1534796029}
   videoSphere: {fileID: 1195417928}
   world: {fileID: 4828271137434809779}
+  canvas: {fileID: 1689403718}
 --- !u!1 &963398954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,6 +1020,7 @@ MonoBehaviour:
   logo: {fileID: 472182355}
   focusTime: 5
   betweenTime: 1
+  animator: {fileID: 1689403724}
   textbox: {fileID: 1772500972}
 --- !u!95 &1689403724
 Animator:

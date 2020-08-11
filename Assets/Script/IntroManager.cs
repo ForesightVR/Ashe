@@ -16,7 +16,7 @@ public class IntroManager : MonoBehaviour
     public float focusTime;
     [Tooltip("The time between fade out ending and fade in playing.")]
     public float betweenTime;
-    Animator animator;
+    public Animator animator;
     public TextMeshProUGUI textbox;
 
     private void OnEnable()
@@ -32,7 +32,6 @@ public class IntroManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         logoLayer = logo.gameObject.layer;
 
         SetUpIntro();
@@ -49,8 +48,7 @@ public class IntroManager : MonoBehaviour
     {
         if (state == VideoState.Entry)
         {
-            logo.gameObject.layer = 0;
-            logo.gameObject.SetActive(false);
+            SetUpIntro();
         }
     }
 
