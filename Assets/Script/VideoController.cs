@@ -10,6 +10,7 @@ public class VideoController : MonoBehaviour
     public GameObject canvas;
 
     bool hasStarted;
+    bool isFinished;
 
     private void OnEnable()
     {
@@ -52,7 +53,14 @@ public class VideoController : MonoBehaviour
     public void Play()
     {
         Debug.LogError("Play");
-        mediaPlayer.Control.SeekFast(0);
+        //mediaPlayer.Control.SeekFast(0);
+
+        if(isFinished)
+        {
+            isFinished = false;
+            mediaPlayer.Rewind(true);
+        }
+
         videoSphere.SetActive(true);
         mediaPlayer.Play();
         world.SetActive(false);
@@ -72,5 +80,6 @@ public class VideoController : MonoBehaviour
         world.SetActive(true);
         videoSphere.SetActive(false);
         mediaPlayer.Stop();
+        isFinished = true;
     }
 }
